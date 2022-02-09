@@ -1,0 +1,25 @@
+All Graphics
+Source: kenney.nl/assets
+Pack: Space Shooter Redux
+License: CC0 1.0 Universal (Public Domain)
+
+music.ogg
+Title: C L I M A X 
+Artist: Soft and Furious
+Source: freemusicarchive.org 
+License: Public Domain
+
+explosion.ogg and fire.ogg
+Source: kenney.nl/assets
+Pack: Sci-Fi Sounds
+License: CC0 1.0 Universal (Public Domain)
+
+loss.ogg and win.ogg
+Source: kenney.nl/assets
+Pack: Music Jingles
+License: CC0 1.0 Universal (Public Domain)
+
+mainFont.ttf
+Font Name: SchoonSquare
+Source: dafont.com
+License: Public Domain
