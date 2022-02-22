@@ -8,6 +8,8 @@ Player::Player(Game* newGame)
 	objectSprite.setTexture(playerTexture);
 
 	moveSpeed = 500.0f;
+	fireCooldown = 0.5f;
+	firingOffset = sf::Vector2f(75, 43);
 }
 
 void Player::Update(sf::Time deltaTime)

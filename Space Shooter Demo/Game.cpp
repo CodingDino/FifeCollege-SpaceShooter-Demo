@@ -10,8 +10,6 @@ Game::Game()
 	, bulletVector		()
 {
 
-	AddBullet(new Bullet());
-
 }
 
 void Game::Run()
@@ -103,6 +101,36 @@ void Game::Update()
 	{
 		bulletVector[i]->Update(deltaTime);
 	}
+
+
+	// Check collision for the bullets
+	for (int bulletIndex = 0; bulletIndex < bulletVector.size(); ++bulletIndex)
+	{
+		for (int enemyIndex = 0; enemyIndex < enemyVector.size(); ++enemyIndex)
+		{
+			bulletVector[bulletIndex]->HandleCollision(enemyVector[enemyIndex]);
+		}
+	}
+
+	// Check if any enemies are dead
+	for (int enemyIndex = 0; enemyIndex < enemyVector.size(); )
+	{
+		if (!enemyVector[enemyIndex]->IsAlive())
+		{
+			// De-allocate the memory
+			delete enemyVector[enemyIndex]; // This is now garbage memory 
+			// AND we don't have access to it
+			enemyVector[enemyIndex] = nullptr;
+
+			// Remove it from our vector
+			enemyVector.erase(enemyVector.begin() + enemyIndex);
+		}
+		else
+		{
+			++enemyIndex;
+		}
+	}
+
 }
 
 void Game::AddBullet(Bullet* bulletToAdd)

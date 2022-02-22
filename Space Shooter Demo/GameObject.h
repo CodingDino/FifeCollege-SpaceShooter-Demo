@@ -12,6 +12,7 @@ public:
 	void SetVelocity(sf::Vector2f newVelocity);
 	void SetPosition(sf::Vector2f newPosition);
 	sf::Vector2f GetPosition();
+	sf::FloatRect GetCollider();
 
 protected:
 

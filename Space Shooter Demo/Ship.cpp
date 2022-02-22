@@ -3,8 +3,14 @@
 #include "Game.h"
 
 Ship::Ship(Game* newGame)
-	: moveSpeed (0)
-	, myGame	(newGame)
+	: GameObject		()
+	, moveSpeed			(0)
+	, fireCooldown		(3)
+	, firingOffset		(0, 0)
+	, maxHealth			(100)
+	, currentHealth		(100)
+	, myGame			(newGame)
+	, timeSinceFire		()
 {
 }
 
@@ -25,17 +31,46 @@ void Ship::Move(sf::Vector2f direction)
 
 void Ship::Fire()
 {
-	// Create a bullet
-	Bullet* newBullet = new Bullet();
+	if (timeSinceFire.asSeconds() >= fireCooldown)
+	{
+		// Create a bullet
+		Bullet* newBullet = new Bullet();
 
-	// set the bullet's position to our 
-	//		ship's position + some firing offset (TODO)
-	newBullet->SetPosition(GetPosition());
+		// set the bullet's position to our 
+		//		ship's position + some firing offset
+		newBullet->SetPosition(GetPosition()+ firingOffset);
 
-	// set the bullet's velocity based on the 
-	//		type of ship
-	newBullet->SetVelocity(sf::Vector2f(600, 0));
+		// set the bullet's velocity based on the 
+		//		type of ship
+		newBullet->SetVelocity(sf::Vector2f(600, 0));
 
-	// Give the bullet to the game to manage
-	myGame->AddBullet(newBullet);
+		// Give the bullet to the game to manage
+		myGame->AddBullet(newBullet);
+
+		// We just fired, so set our time to 0
+		timeSinceFire = sf::Time();
+	}
 }
+
+void Ship::Update(sf::Time deltaTime)
+{
+
+	GameObject::Update(deltaTime);
+
+	timeSinceFire += deltaTime;
+}
+
+void Ship::TakeDamage(int damage)
+{
+	currentHealth -= damage;
+
+	// Check if we died, if so, play 
+	// explosions sound and image?
+}
+
+bool Ship::IsAlive()
+{
+	return currentHealth > 0;
+}
+
+

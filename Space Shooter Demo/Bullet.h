@@ -1,6 +1,8 @@
 #pragma once
 #include "GameObject.h"
 
+class Ship;
+
 class Bullet :
     public GameObject
 {
@@ -8,6 +10,8 @@ class Bullet :
 public:
 
     Bullet();
+
+    void HandleCollision(Ship* target);
 
 private:
 
